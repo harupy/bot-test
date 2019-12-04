@@ -1,8 +1,8 @@
 name: comment-on-pr example
 on: pull_request
 jobs:
-  example:
-    name: sample comment
+  test:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
