@@ -32,6 +32,7 @@ def create_jira_link(issue_id):
 
 
 def main():
+    print(gh = Github(os.getenv('GITHUB_HEAD_REF')))
     base_url = get_actions_input('base_url')
     gh = Github(os.getenv('GITHUB_TOKEN'))
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
