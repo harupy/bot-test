@@ -14,7 +14,7 @@ def main():
     print(event['after'])
 
     repo = g.get_repo(event['repository']['full_name'])
-    pulls = repo.get_pulls(state='open', sort='created', base='develop')
+    pulls = repo.get_pulls(state='open', sort='created', base='master')
     for pr in pulls:
         print(pr.number)
 
