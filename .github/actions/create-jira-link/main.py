@@ -18,7 +18,9 @@ def main():
     repo = g.get_repo(event['repository']['full_name'])
     pulls = repo.get_pulls(state='open', sort='created', base='master')
     for pr in pulls:
-        print(pr.get_comments())
+        for comment in pr.get_comments():
+            print(comment)
+            print(dir(comment))
 
     # Then play with your Github objects:
     for repo in g.get_user().get_repos():
