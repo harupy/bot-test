@@ -10,3 +10,5 @@ jobs:
         uses: ./.github/actions/create-jira-link
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          base_url: https://www.google.com/
