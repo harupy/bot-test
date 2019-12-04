@@ -36,10 +36,8 @@ def main():
 
     # find correspoding pull request
     prs = repo.get_pulls(state='open', sort='created', base='master', head=event['after'])
-    for p in prs:
-        print(p.name)
-
-    pr = list(filter(lambda p: p.merge_commit_sha == event['after'], prs))[0]
+    # pr = list(filter(lambda p: p.merge_commit_sha == event['after'], prs))[0]
+    pr = prs[0]
 
     old_comments = [c.body for c in pr.get_issue_comments()]
     new_comment = create_jira_link(branch)
