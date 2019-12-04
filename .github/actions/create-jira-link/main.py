@@ -1,7 +1,9 @@
 import os
 from github import Github
 
-print(os.getenv('GITHUB_EVENT_PATH'))
+
+with open(os.getenv('GITHUB_EVENT_PATH'), 'r') as f:
+    print(f.read())    
 
 # or using an access token
 g = Github(os.getenv('GITHUB_TOKEN'))
