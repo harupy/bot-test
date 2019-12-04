@@ -9,6 +9,11 @@ def read_json(filepath):
 event = read_json(os.getenv('GITHUB_EVENT_PATH'))
 print(event['after'])
 
+repo = g.get_repo(event['repository']['full_name'])
+pulls = repo.get_pulls(state='open', sort='created', base='develop')
+for pr in pulls:
+    print(pr.number)
+
 # or using an access token
 g = Github(os.getenv('GITHUB_TOKEN'))
 
