@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: comment PR
-        uses: .github/actions/create-jira-link
+        uses: ./.github/actions/create-jira-link
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
