@@ -6,17 +6,22 @@ def read_json(filepath):
     with open(filepath, 'r') as f:
         return json.load(f)
 
-event = read_json(os.getenv('GITHUB_EVENT_PATH'))
-print(event['after'])
+def main():
+    # or using an access token
+    g = Github(os.getenv('GITHUB_TOKEN'))
 
-repo = g.get_repo(event['repository']['full_name'])
-pulls = repo.get_pulls(state='open', sort='created', base='develop')
-for pr in pulls:
-    print(pr.number)
+    event = read_json(os.getenv('GITHUB_EVENT_PATH'))
+    print(event['after'])
 
-# or using an access token
-g = Github(os.getenv('GITHUB_TOKEN'))
+    repo = g.get_repo(event['repository']['full_name'])
+    pulls = repo.get_pulls(state='open', sort='created', base='develop')
+    for pr in pulls:
+        print(pr.number)
 
-# Then play with your Github objects:
-for repo in g.get_user().get_repos():
-    print(repo.name)
+    # Then play with your Github objects:
+    for repo in g.get_user().get_repos():
+        print(repo.name)
+
+
+if __name__ == '__main__':
+    main()
