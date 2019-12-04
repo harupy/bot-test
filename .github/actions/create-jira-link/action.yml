@@ -1,9 +1,10 @@
-name: Comment on PR
+name: Create JI
 author: harupy
 description: Leaves a comment on an open PR matching a push event.
-branding:
-  icon: 'message-square'
-  color: 'blue'
+inputs:
+  base_url:
+    description: base url
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'

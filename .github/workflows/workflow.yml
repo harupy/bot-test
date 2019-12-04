@@ -1,12 +1,14 @@
-name: comment-on-pr example
+name: comment-on-pr
 on: pull_request
 jobs:
-  example:
-    name: sample comment
+  test:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: comment PR
         uses: ./.github/actions/create-jira-link
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          base_url: https://www.google.com/
