@@ -50,7 +50,5 @@ def main():
         print('The comment already exists')
 
 
-
-
 if __name__ == '__main__':
     main()

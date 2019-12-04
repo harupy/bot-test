@@ -9,4 +9,4 @@ jobs:
       - name: comment PR
         uses: ./.github/actions/create-jira-link
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
