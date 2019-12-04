@@ -19,6 +19,10 @@ def parse_issue_id(branch):
     return branch.split('-')[0]
 
 
+def has_duplicate(new_comment, comments):
+    return comment in comments
+
+
 def create_jira_link(issue_id):
     pass
 
@@ -28,16 +32,11 @@ def main():
     g = Github(os.getenv('GITHUB_TOKEN'))
 
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
-    print(event)
-    print(list(event['pull_request'].keys()))
-    print(event['after'])
-
     branch = parse_branch(event['pull_request']['url'])
-    print(branch)
-
     repo = g.get_repo(event['repository']['full_name'])
     pulls = repo.get_pulls(state='open', sort='created', base='master')
     for pr in pulls:
+        print('sha:', pr.merge_commit_sha)
         for comment in pr.get_issue_comments():  # get_comments only get review comments
             print(comment.body)
             print(dir(comment))
