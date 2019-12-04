@@ -20,32 +20,31 @@ def parse_issue_id(branch):
 
 
 def has_duplicate(new_comment, comments):
-    return comment in comments
+    return new_comment in comments
 
 
 def create_jira_link(issue_id):
-    pass
+    return 'Branch: {}'.format(issue_id)
 
 
 def main():
-    # or using an access token
     g = Github(os.getenv('GITHUB_TOKEN'))
-
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
     branch = parse_branch(event['pull_request']['url'])
     repo = g.get_repo(event['repository']['full_name'])
-    pulls = repo.get_pulls(state='open', sort='created', base='master')
-    for pr in pulls:
-        print('sha:', pr.merge_commit_sha)
-        for comment in pr.get_issue_comments():  # get_comments only get review comments
-            print(comment.body)
-            print(dir(comment))
 
-        pr.create_issue_comment('Branch: {}'.format(branch))
+    # find correspoding pull request
+    prs = repo.get_pulls(state='open', sort='created', base='master')
+    pr = list(filter(lambda p: p.merge_commit_sha == event['after'], prs))[0]
 
-    # Then play with your Github objects:
-    for repo in g.get_user().get_repos():
-        print(repo.name)
+    old_comments = [c.body for c in pr.get_issue_comments()]
+    new_comment = create_jira_link(branch)
+
+    if not has_duplicate(new_comment, old_comments):
+        pr.create_issue_comment(new_comment)
+    else:
+        print('The comment already exists')
+
 
 
 
