@@ -14,6 +14,7 @@ def main():
 
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
     print(event)
+    print(list(event.keys()))
     print(event['after'])
 
     repo = g.get_repo(event['repository']['full_name'])
