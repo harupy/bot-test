@@ -33,10 +33,10 @@ def create_jira_link(issue_id):
 
 def main():
     base_url = get_actions_input('base_url')
-    g = Github(os.getenv('GITHUB_TOKEN'))
+    gh = Github(os.getenv('GITHUB_TOKEN'))
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
     branch = parse_branch(event['pull_request']['url'])
-    repo = g.get_repo(event['repository']['full_name'])
+    repo = gh.get_repo(event['repository']['full_name'])
 
     prs = repo.get_pulls(state='open', sort='created', base='master', head=event['after'])
     pr = prs[0]
@@ -44,10 +44,10 @@ def main():
     old_comments = [c.body for c in pr.get_issue_comments()]
     new_comment = create_jira_link(branch)
 
-    if not has_duplicate(new_comment, old_comments):
-        pr.create_issue_comment(new_comment)
-    else:
-        pr.create_issue_comment(new_comment)
+    if has_duplicate(new_comment, old_comments):
+        print('This pulle request already has the JIRA issue link. ')
+
+    pr.create_issue_comment(new_comment)
 
 
 if __name__ == '__main__':
