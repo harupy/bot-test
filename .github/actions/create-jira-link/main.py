@@ -17,6 +17,7 @@ def main():
 
     repo = g.get_repo(event['repository']['full_name'])
     pulls = repo.get_pulls(state='open', sort='created', base='master')
+    print('pulls:', len(pulls))
     for pr in pulls:
         for comment in pr.get_comments():
             print(comment)
