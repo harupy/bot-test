@@ -13,7 +13,7 @@ jobs:
         with:
           base_url: https://www.google.com/
   product:
-    name: test
+    name: product
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
