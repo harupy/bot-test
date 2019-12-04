@@ -9,6 +9,10 @@ def read_json(filepath):
         return json.load(f)
 
 
+def get_actions_input(name):
+    return os.getenv('INPUT_{}'.format(name).upper())
+
+
 def parse_branch(url):
     pattern = r'https://api.github.com/repos/[^/]+/([^/]+)'
     m = re.match(pattern, url)
@@ -28,8 +32,7 @@ def create_jira_link(issue_id):
 
 
 def main():
-    base_url = os.getenv('INPUT_BASE_URL')
-    print(base_url)
+    base_url = get_actions_input('base_url')
     g = Github(os.getenv('GITHUB_TOKEN'))
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
     branch = parse_branch(event['pull_request']['url'])
