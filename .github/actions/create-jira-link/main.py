@@ -7,7 +7,7 @@ def read_json(filepath):
         return json.load(f)
 
 event = read_json(os.getenv('GITHUB_EVENT_PATH'))
-print(event['push'])
+print(event['after'])
 
 # or using an access token
 g = Github(os.getenv('GITHUB_TOKEN'))
