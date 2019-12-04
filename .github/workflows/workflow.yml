@@ -5,6 +5,7 @@ jobs:
     name: sample comment
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: comment PR
         uses: ../github/actions
         env:
