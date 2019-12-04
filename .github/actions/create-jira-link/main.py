@@ -1,9 +1,13 @@
 import os
+import json
 from github import Github
 
+def read_json(filepath):
+    with open(filepath, 'r') as f:
+        return json.load(f)
 
-with open(os.getenv('GITHUB_EVENT_PATH'), 'r') as f:
-    print(f.read())    
+event = read_json(os.getenv('GITHUB_EVENT_PATH'))
+print(event['push'])
 
 # or using an access token
 g = Github(os.getenv('GITHUB_TOKEN'))
