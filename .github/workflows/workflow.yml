@@ -1,4 +1,4 @@
-name: comment-on-pr example
+name: comment-on-pr
 on: pull_request
 jobs:
   test:
