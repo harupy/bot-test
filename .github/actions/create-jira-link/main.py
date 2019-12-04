@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from github import Github
 
 
@@ -9,7 +10,17 @@ def read_json(filepath):
 
 
 def parse_branch(url):
-    return url.split('/')[-1]
+    pattern = r'https://api.github.com/repos/[^/]+/([^/]+)'
+    m = re.match(pattern, url)
+    return m.group(1) if m else ''
+
+
+def parse_issue_id(branch):
+    return branch.split('-')[0]
+
+
+def create_jira_link(issue_id):
+    pass
 
 
 def main():
