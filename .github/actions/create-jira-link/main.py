@@ -13,6 +13,7 @@ def main():
     g = Github(os.getenv('GITHUB_TOKEN'))
 
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
+    print(event)
     print(event['after'])
 
     repo = g.get_repo(event['repository']['full_name'])
