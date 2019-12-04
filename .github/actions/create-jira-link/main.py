@@ -37,7 +37,7 @@ def main():
     # find correspoding pull request
     prs = repo.get_pulls(state='open', sort='created', base='master', head=event['after'])
     for p in prs:
-        print(pr.name)
+        print(p.name)
 
     pr = list(filter(lambda p: p.merge_commit_sha == event['after'], prs))[0]
 
