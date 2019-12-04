@@ -30,11 +30,15 @@ def create_jira_link(issue_id):
 def main():
     g = Github(os.getenv('GITHUB_TOKEN'))
     event = read_json(os.getenv('GITHUB_EVENT_PATH'))
+    print(event['after'])
     branch = parse_branch(event['pull_request']['url'])
     repo = g.get_repo(event['repository']['full_name'])
 
     # find correspoding pull request
-    prs = repo.get_pulls(state='open', sort='created', base='master')
+    prs = repo.get_pulls(state='open', sort='created', base='master', head=event['after'])
+    for p in prs:
+        print(pr.name)
+
     pr = list(filter(lambda p: p.merge_commit_sha == event['after'], prs))[0]
 
     old_comments = [c.body for c in pr.get_issue_comments()]
