@@ -1,0 +1,9 @@
+name: Comment on PR
+author: harupy
+description: Leaves a comment on an open PR matching a push event.
+branding:
+  icon: 'message-square'
+  color: 'blue'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
