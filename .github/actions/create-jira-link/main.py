@@ -45,7 +45,7 @@ def main():
     if not has_duplicate(new_comment, old_comments):
         pr.create_issue_comment(new_comment)
     else:
-        print('The comment already exists')
+        pr.create_issue_comment(new_comment)
 
 
 if __name__ == '__main__':
